@@ -33,4 +33,4 @@ export function resolvePath(pathname: string): Route {
 // Ensure links generated in your app correctly append the base path 
 // if your custom router doesn't automatically handle it via <a href>
 export const href = (page: PageId, lang: Lang, hash?: string) =>
-  '/nexusintelligence-site' + PATHS[page][lang] + (hash ? `#${hash}` : '');
+  '/nexusintelligence' + PATHS[page][lang] + (hash ? `#${hash}` : '');
