@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------ fonts (self-hosted, no third-party request) */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("/fonts/inter-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: swap; src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-display: swap; src: url("/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 700; font-display: swap; src: url("/fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2"); }
+
+/* ------------------------------------------------------------ palette (MP131 + Nexus Back) */
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --color-deep: #181615;      /* dark sections */
+  --color-night: #121110;     /* footer */
+  --color-bokara: #2A2725;
+  --color-hunter: #3A4A3F;
+  --color-lime: #91A673;
+  --color-lime-2: #B5C99A;
+  --color-sand: #AE8F60;
+  --color-sand-2: #D2B888;
+  --color-whisper: #EAE2D3;
+  --color-bright: #F6F2F1;
+  --color-stone: #A39A90;     /* secondary text on dark */
+  --color-rust: #E2805F;
+  --color-navy: #15151B;      /* Nexus Back sections */
+  --color-blue: #4A78C8;
+  --color-blue-2: #8FB0EA;
+  --color-terra: #E07A5F;
+  --color-mist: #A3A2B0;      /* secondary text on navy */
+  --color-cloud: #F4F4F9;
+
+  --text-display: clamp(42px, 7.4vw, 92px);
+  --text-display--line-height: .98;
+  --text-h1: clamp(38px, 5.8vw, 72px);
+  --text-h1--line-height: 1.02;
+  --text-h2: clamp(34px, 4.8vw, 58px);
+  --text-h2--line-height: 1.05;
+  --text-lead: clamp(17px, 1.6vw, 19.5px);
+  --text-lead--line-height: 1.6;
+
+  --ease-soft: cubic-bezier(.2, .7, .2, 1);
+  --breakpoint-nav: 70rem;    /* full navigation from 1120 px; below, the menu button */
+}
+
+/* Colours that depend on the light/dark preference and on the section a component sits in.
+   Components only use these names (bg-page, text-ink, text-hl, bg-card…), never raw colours for text. */
+@theme inline {
+  --color-page: var(--page);
+  --color-page-alt: var(--page-alt);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-rust-ink: var(--rust-ink);
+  --color-blue-ink: var(--blue-ink);
+  --color-hl: var(--hl);
+  --color-sub: var(--sub);
+  --color-card: var(--card);
+  --color-card-line: var(--card-line);
+  --color-tone: var(--tone);
+  --color-tone-soft: var(--tone-soft);
+  --shadow-card: var(--card-shadow);
+  --shadow-film: 0 0 0 1px rgba(246, 242, 241, .12), 0 40px 100px -20px rgba(0, 0, 0, .7), 0 0 120px -30px rgba(var(--tone-rgb), .4);
+}
+
+:root {
+  --page: #F6F2F1; --page-alt: #EFE9E3; --surface: #FFFFFF;
+  --ink: #2A2725; --muted: #6B6560; --line: #E4DBCD;
+  --accent: #4F6339; --blue-ink: #3B64AE; --rust-ink: #A9502F;
+  --card-shadow: 0 1px 2px rgba(42, 39, 37, .04), 0 12px 32px -12px rgba(42, 39, 37, .14);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #1F1D1C; --page-alt: #191716; --surface: #2A2725;
+    --ink: #F6F2F1; --muted: #B9B0A6; --line: #3A3633;
+    --accent: #B5C99A; --blue-ink: #8FB0EA; --rust-ink: #F0A283;
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 12px 32px -12px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+
+/* Product tones: Nexus B2B is lime, Nexus Back is blue. Set on a page or a section. */
+:root, .tone-b2b { --tone: #91A673; --tone-soft: #B5C99A; --tone-on-dark: #91A673; --tone-on-light: var(--accent); --tone-rgb: 145, 166, 115; }
+.tone-back { --tone: #4A78C8; --tone-soft: #8FB0EA; --tone-on-dark: #8FB0EA; --tone-on-light: var(--blue-ink); --tone-rgb: 74, 120, 200; }
+
+/* Section surfaces: what text-hl, text-sub and bg-card mean inside them. */
+@utility surface-light { background-color: var(--page); color: var(--ink); --hl: var(--tone-on-light); --sub: var(--muted); --card: var(--surface); --card-line: var(--line); }
+@utility surface-alt { background-color: var(--page-alt); color: var(--ink); --hl: var(--tone-on-light); --sub: var(--muted); --card: var(--surface); --card-line: var(--line); }
+@utility surface-dark { background-color: #181615; color: #F6F2F1; --hl: var(--tone-on-dark); --sub: #A39A90; --card: rgba(246, 242, 241, .045); --card-line: rgba(246, 242, 241, .12); --card-shadow: none; }
+@utility surface-navy { background-color: #15151B; color: #F4F4F9; --hl: var(--tone-on-dark); --sub: #A3A2B0; --card: rgba(244, 244, 249, .045); --card-line: rgba(244, 244, 249, .1); --card-shadow: none; }
+
+/* ------------------------------------------------------------ decorative backgrounds */
+@utility glow-hero {
+  background:
+    radial-gradient(55% 45% at 78% 6%, rgba(var(--tone-rgb), .26), transparent 70%),
+    radial-gradient(45% 40% at 8% 70%, rgba(174, 143, 96, .13), transparent 70%),
+    radial-gradient(40% 35% at 50% 100%, rgba(58, 74, 63, .5), transparent 75%);
+}
+@utility glow-corner {
+  background:
+    radial-gradient(45% 40% at 12% 18%, rgba(var(--tone-rgb), .14), transparent 70%),
+    radial-gradient(40% 40% at 100% 100%, rgba(174, 143, 96, .1), transparent 70%);
+}
+@utility glow-contact {
+  background:
+    radial-gradient(50% 55% at 0% 85%, rgba(var(--tone-rgb), .18), transparent 70%),
+    radial-gradient(40% 45% at 100% 35%, rgba(58, 74, 63, .45), transparent 70%);
+}
+@utility glow-back {
+  background:
+    radial-gradient(50% 35% at 85% 0%, rgba(74, 120, 200, .28), transparent 70%),
+    radial-gradient(40% 30% at 0% 55%, rgba(224, 122, 95, .1), transparent 70%);
+}
+@utility glow-card-b2b { background: radial-gradient(circle at 85% 0%, rgba(145, 166, 115, .35), transparent 55%), linear-gradient(160deg, #2E3B32 0%, #181615 75%); }
+@utility glow-card-back { background: radial-gradient(circle at 85% 0%, rgba(74, 120, 200, .42), transparent 55%), linear-gradient(160deg, #222B44 0%, #15151B 75%); }
+@utility glow-formula { background: radial-gradient(circle at 100% 0%, rgba(145, 166, 115, .3), transparent 45%), #181615; }
+@utility stage-b2b { background: linear-gradient(150deg, #3A4A3F 0%, #232A25 55%, #181615 100%); }
+@utility stage-back { background: linear-gradient(150deg, #2B3A63 0%, #1E2233 55%, #121218 100%); }
+@utility dots {
+  background-image: radial-gradient(rgba(246, 242, 241, .09) 1.2px, transparent 1.6px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 30%, transparent 85%);
+}
+@utility dots-tight {
+  background-image: radial-gradient(rgba(246, 242, 241, .08) 1.2px, transparent 1.6px);
+  background-size: 26px 26px;
+}
+@utility fade-bottom { background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, .5)); }
+@utility shot-shadow { filter: drop-shadow(0 30px 40px rgba(24, 22, 21, .28)) drop-shadow(0 4px 10px rgba(24, 22, 21, .12)); }
+
+/* ------------------------------------------------------------ base */
+@layer base {
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body {
+    @apply bg-page text-ink font-sans antialiased;
+    font-size: 17px; line-height: 1.6; text-rendering: optimizeLegibility; overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { font-weight: 800; letter-spacing: -.035em; line-height: 1.05; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :focus-visible { outline: 2px solid var(--color-lime); outline-offset: 3px; border-radius: 6px; }
+  ::selection { background: rgba(145, 166, 115, .35); }
+  @media (max-width: 640px) { body { font-size: 16px; } }
+}
+
+/* ------------------------------------------------------------ reveal on scroll (only when JS runs) */
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease-soft), transform .9s var(--ease-soft); }
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
