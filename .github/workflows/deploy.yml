@@ -1,45 +1,37 @@
+# Builds the site and publishes it on GitHub Pages at every push to main.
+# One-time setup on GitHub: Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # 1. Installation de pnpm (obligatoire car non inclus par défaut sur Ubuntu)
-      - name: Install npm
-        uses: npm/action-setup@v3
+      - uses: actions/setup-node@v4
         with:
-          version: 9 # Vous pouvez spécifier '8' si vous utilisez une ancienne version
-
-      # 2. Configuration de Node.js avec le cache défini sur 'pnpm'
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      # 3. Installation des dépendances (étape manquante dans votre code initial)
-      - name: Install dependencies
-        run: npm install
-
-      # 4. Build du projet
+          node-version: 22
+          cache: npm
+      - run: npm ci
       - name: Build project
         run: npm run build
 
       # 5. Disable Jekyll
       - name: Add .nojekyll
         run: touch dist/.nojekyll
-      
 
       - uses: actions/upload-pages-artifact@v3
         with:
