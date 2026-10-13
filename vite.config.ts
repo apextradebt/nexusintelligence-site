@@ -7,6 +7,7 @@ import path from 'node:path';
 // `npm run build` builds the client, then renders every page to its own HTML file (scripts/prerender.mjs).
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/nexusintelligence-site/',
   resolve: {
     alias: { '@': path.resolve(import.meta.dirname, './src') },
   },
