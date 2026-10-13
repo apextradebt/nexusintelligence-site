@@ -27,7 +27,6 @@ const PAGES: Record<PageId | 'notFound', { component: ComponentType; solidHeader
 export function App({ route }: { route: Route }) {
   const { component: Page, solidHeader } = PAGES[route.page];
 
-  // The built pages carry their title in the HTML; this keeps it right in `npm run dev` too.
   useEffect(() => {
     document.title = meta[route.lang][route.page].title;
     document.documentElement.lang = route.lang;
