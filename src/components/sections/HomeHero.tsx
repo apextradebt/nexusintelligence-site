@@ -1,6 +1,4 @@
-import { Film } from '@/components/media/Film';
 import { Button } from '@/components/ui/Button';
-import { Pill } from '@/components/ui/Pill';
 import { Reveal } from '@/components/ui/Reveal';
 import { Rich } from '@/components/ui/Rich';
 import { Section } from '@/components/ui/Section';
@@ -31,7 +29,7 @@ export function HomeHero() {
           <Button href="#solutions" variant="ghost">{t.hero.explore}</Button>
         </Reveal>
       </div>
-      
+
       <Stats items={t.stats} />
     </Section>
   );

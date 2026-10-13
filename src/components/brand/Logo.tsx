@@ -1,5 +1,4 @@
 import { cn } from '@/lib/cn';
-import { Mark } from './Mark';
 import { Wordmark } from './Wordmark';
 import type { LogoVariant } from './logoGeometry';
 
