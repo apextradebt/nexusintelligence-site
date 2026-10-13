@@ -17,7 +17,7 @@ jobs:
 
       # 1. Installation de pnpm (obligatoire car non inclus par défaut sur Ubuntu)
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
+        uses: npm/action-setup@v3
         with:
           version: 9 # Vous pouvez spécifier '8' si vous utilisez une ancienne version
 
@@ -26,15 +26,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: 'npm'
 
       # 3. Installation des dépendances (étape manquante dans votre code initial)
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       # 4. Build du projet
       - name: Build project
-        run: pnpm run build
+        run: npm run build
       
 
       - uses: actions/upload-pages-artifact@v3
