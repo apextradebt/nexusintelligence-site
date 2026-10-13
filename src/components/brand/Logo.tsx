@@ -22,7 +22,6 @@ export function Logo({ href, label, variant = 'dark', size = 'header', className
   const s = SIZES[size];
   return (
     <a href={href} aria-label={label} className={cn('inline-flex flex-none items-center gap-3 max-sm:gap-2.5', className)}>
-      <Mark variant={variant} rim={s.rim} className={s.mark} />
       <Wordmark variant={variant} sublineStroke={s.stroke} className={cn(s.word, size === 'header' && 'max-sm:hidden')} />
       {size === 'header' && <Wordmark variant={variant} withSubline={false} className={cn(s.nexus, 'hidden max-sm:block')} />}
     </a>
