@@ -6,12 +6,12 @@ export type PageId = 'home' | 'b2b' | 'back' | 'technology' | 'faq' | 'contact' 
 
 export const PATHS: Record<PageId, Record<Lang, string>> = {
   home: { fr: '/', en: '/en/' },
-  b2b: { fr: '/nexusintellingence-site/nexus-b2b/', en: '/nexusintellingence-site/en/nexus-b2b/' },
-  back: { fr: '/nexusintellingence-site/nexus-back/', en: '/nexusintellingence-site/en/nexus-back/' },
-  technology: { fr: '/nexusintellingence-site/technologie/', en: '/nexusintellingence-site/en/technology/' },
-  faq: { fr: '/nexusintellingence-site/faq/', en: '/nexusintellingence-site/en/faq/' },
-  contact: { fr: '/nexusintellingence-site/contact/', en: '/nexusintellingence-site/en/contact/' },
-  legal: { fr: '/nexusintellingence-site/mentions-legales/', en: '/nexusintellingence-site/en/legal-notice/' },
+  b2b: { fr: '/nexus-b2b/', en: '/en/nexus-b2b/' },
+  back: { fr: '/nexus-back/', en: '/en/nexus-back/' },
+  technology: { fr: '/technologie/', en: '/en/technology/' },
+  faq: { fr: '/faq/', en: '/en/faq/' },
+  contact: { fr: '/contact/', en: '/en/contact/' },
+  legal: { fr: '/mentions-legales/', en: '/en/legal-notice/' },
 };
 
 export type Route = { page: PageId | 'notFound'; lang: Lang };
