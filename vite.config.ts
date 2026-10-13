@@ -5,7 +5,7 @@ import path from 'node:path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/nexusintelligence-site/', // Removed the extra 'n'
+  base: '/', // Removed the extra 'n'
   resolve: {
     alias: { '@': path.resolve(import.meta.dirname, './src') },
   },
