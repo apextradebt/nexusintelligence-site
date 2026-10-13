@@ -18,12 +18,11 @@ export type Route = { page: PageId | 'notFound'; lang: Lang };
 
 /** Finds the page for an address ("/en/nexus-b2b", "/faq/index.html"…). Unknown addresses are the 404 page. */
 export function resolvePath(pathname: string): Route {
-  // Strip the GitHub Pages base path if it exists
-  let p = pathname.replace(/^\/nexusintellingence-site/, '');
-  // Fallback to '/' if stripping left it empty
+  let p = pathname.replace(/^\/nexusintelligence-site/, '');
   if (p === '') p = '/';
   p = p.replace(/index\.html$/, '');
   if (!p.endsWith('/')) p += '/';
+
   for (const page of Object.keys(PATHS) as PageId[]) {
     for (const lang of LANGS) if (PATHS[page][lang] === p) return { page, lang };
   }

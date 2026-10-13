@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # 1. Installation de pnpm (obligatoire car non inclus par défaut sur Ubuntu)
-      - name: Install pnpm
+      - name: Install npm
         uses: npm/action-setup@v3
         with:
           version: 9 # Vous pouvez spécifier '8' si vous utilisez une ancienne version
@@ -35,6 +35,10 @@ jobs:
       # 4. Build du projet
       - name: Build project
         run: npm run build
+
+      # 5. Disable Jekyll
+      - name: Add .nojekyll
+        run: touch dist/.nojekyll
       
 
       - uses: actions/upload-pages-artifact@v3

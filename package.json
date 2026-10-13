@@ -1,7 +1,7 @@
 {
   "name": "nexusintelligence-site",
   "version": "1.0.0",
-  "homepage": "https://apextradebt.github.io/nexusintellingence-site/",
+  "homepage": "https://apextradebt.github.io/nexusintelligence-site/",
   "private": true,
   "type": "module",
   "scripts": {
