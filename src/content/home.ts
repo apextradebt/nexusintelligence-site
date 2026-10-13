@@ -47,7 +47,7 @@ const fr = {
         'Prix d’achat avec votre marge cible, export Excel',
       ],
       more: 'Découvrir Nexus B2B',
-      image: '/img/b2b-prices-fr.webp',
+      image: '/nexusintelligence-site/img/b2b-prices-fr.webp',
     },
     back: {
       chip: 'Magasins',
@@ -60,7 +60,7 @@ const fr = {
         'Devis PDF, paiement, expéditions et suivi',
       ],
       more: 'Découvrir Nexus Back',
-      image: '/img/back-strategy.webp',
+      image: '/nexusintelligence-site/img/back-strategy.webp',
     },
   },
   engine: {
@@ -122,7 +122,7 @@ const en: typeof fr = {
         'Buy price with your target margin, Excel export',
       ],
       more: 'Explore Nexus B2B',
-      image: '/img/b2b-prices-en.webp',
+      image: '/nexusintelligence-site/img/b2b-prices-en.webp',
     },
     back: {
       chip: 'Stores',
@@ -135,7 +135,7 @@ const en: typeof fr = {
         'PDF quote, payment, shipments and tracking',
       ],
       more: 'Explore Nexus Back',
-      image: '/img/back-strategy.webp',
+      image: '/nexusintelligence-site/img/back-strategy.webp',
     },
   },
   engine: {

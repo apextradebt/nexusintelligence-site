@@ -9,8 +9,8 @@ export type FilmId = 'b2b' | 'back';
 
 const fr = {
   b2b: {
-    src: '/video/nexus-b2b-fr.mp4',
-    poster: '/img/poster-b2b-fr.jpg',
+    src: '/nexusintelligence-site/video/nexus-b2b-fr.mp4',
+    poster: '/nexusintelligence-site/img/poster-b2b-fr.jpg',
     label: 'Film de présentation Nexus B2B',
     watch: 'Voir le film Nexus B2B',
     badge: '',
@@ -20,8 +20,8 @@ const fr = {
     transcript: B2B_FR_TRANSCRIPT,
   },
   back: {
-    src: '/video/nexus-back-en.mp4',
-    poster: '/img/poster-back-en.jpg',
+    src: '/nexusintelligence-site/video/nexus-back-en.mp4',
+    poster: '/nexusintelligence-site/img/poster-back-en.jpg',
     label: 'Film de présentation Nexus Back (en anglais)',
     watch: 'Voir le film Nexus Back',
     badge: 'EN',
@@ -34,8 +34,8 @@ const fr = {
 
 const en: typeof fr = {
   b2b: {
-    src: '/video/nexus-b2b-en.mp4',
-    poster: '/img/poster-b2b-en.jpg',
+    src: '/nexusintelligence-site/video/nexus-b2b-en.mp4',
+    poster: '/nexusintelligence-site/img/poster-b2b-en.jpg',
     label: 'Nexus B2B product film',
     watch: 'Watch the Nexus B2B film',
     badge: '',
@@ -45,8 +45,8 @@ const en: typeof fr = {
     transcript: B2B_EN_TRANSCRIPT,
   },
   back: {
-    src: '/video/nexus-back-en.mp4',
-    poster: '/img/poster-back-en.jpg',
+    src: '/nexusintelligence-site/video/nexus-back-en.mp4',
+    poster: '/nexusintelligence-site/img/poster-back-en.jpg',
     label: 'Nexus Back product film',
     watch: 'Watch the Nexus Back film',
     badge: '',
