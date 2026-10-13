@@ -18,7 +18,7 @@ export type Route = { page: PageId | 'notFound'; lang: Lang };
 
 export function resolvePath(pathname: string): Route {
   // Strip the exact GitHub Pages base URL completely
-  let p = pathname.replace(/^\//, '');
+  let p = pathname.replace(/^\/nexusintelligence/, '');
 
   if (p === '') p = '/';
   p = p.replace(/index\.html$/, '');
