@@ -15,7 +15,7 @@ if (!template.includes('<!--app-html-->') || !template.includes('<!--app-head-->
   throw new Error('dist/index.html has lost its <!--app-head--> / <!--app-html--> markers');
 }
 const entry = fs.readdirSync(ssrDir).find((f) => /^entry-server\.(m?js)$/.test(f));
-const { render, pages } = await import(pathToFileURL(path.join(ssrDir, entry)).href);
+const { render, pages, sitemapPages } = await import(pathToFileURL(path.join(ssrDir, entry)).href);
 
 function page(url) {
   const { html, head, lang } = render(url);
@@ -37,10 +37,22 @@ for (const p of pages) {
 write(path.join(dist, '404.html'), page('/404/'));
 console.log('  page /404.html');
 
-const urls = pages.map((p) => [
+const sitemapList = sitemapPages ?? pages;
+const today = new Date().toISOString().slice(0, 10);
+const priorities = {
+  home: '1.0',
+  b2b: '0.9',
+  back: '0.9',
+  technology: '0.8',
+};
+
+const urls = sitemapList.map((p) => [
   '  <url>',
   `    <loc>${SITE_URL}${p.path}</loc>`,
   ...p.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" href="${SITE_URL}${a.path}"/>`),
+  `    <lastmod>${today}</lastmod>`,
+  '    <changefreq>weekly</changefreq>',
+  `    <priority>${priorities[p.page] || '0.8'}</priority>`,
   '  </url>',
 ].join('\n'));
 write(path.join(dist, 'sitemap.xml'), [
@@ -50,6 +62,6 @@ write(path.join(dist, 'sitemap.xml'), [
   '</urlset>',
   '',
 ].join('\n'));
-console.log(`  sitemap.xml (${pages.length} pages)`);
+console.log(`  sitemap.xml (${sitemapList.length} entries for ${new Set(sitemapList.map(s => s.page)).size} pages)`);
 
 fs.rmSync(ssrDir, { recursive: true, force: true });
