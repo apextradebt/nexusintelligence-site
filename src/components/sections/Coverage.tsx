@@ -22,7 +22,7 @@ export function Coverage({ coverage, rules }: {
   return (
     <div className="mt-5 grid grid-cols-[7fr_5fr] gap-4 max-lg:grid-cols-1">
       <Reveal>
-        <Card className="h-full p-7">
+        <Card className="h-full p-7 backdrop-blur-md">
           <h3 className="text-[19px] font-bold tracking-[-.025em]"><Rich text={coverage.title} /></h3>
           <p className="mt-2 text-[15px] text-sub"><Rich text={coverage.text} /></p>
           <ul className="mt-5 flex flex-wrap gap-2">
@@ -31,7 +31,7 @@ export function Coverage({ coverage, rules }: {
         </Card>
       </Reveal>
       <Reveal delay={1}>
-        <Card className="h-full p-7">
+        <Card className="h-full p-7 backdrop-blur-md">
           <h3 className="text-[19px] font-bold tracking-[-.025em]"><Rich text={rules.title} /></h3>
           <CheckList items={rules.items} icon={ShieldCheck} className="mt-[18px] text-sub [&_li]:text-[15px]" />
         </Card>

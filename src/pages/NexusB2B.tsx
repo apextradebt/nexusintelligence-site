@@ -46,7 +46,17 @@ export function NexusB2B() {
         </div>
       </Section>
 
-      <Section labelledBy="audiences-title">
+      <Section surface="dark" labelledBy="audiences-title">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden transform-gpu">
+          <img
+            src="/img/b2b.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-deep/55" />
+        </div>
         <SectionHeading id="audiences-title" eyebrow={t.audiences.eyebrow} title={t.audiences.title} />
         <AudienceGrid only="b2b" />
       </Section>

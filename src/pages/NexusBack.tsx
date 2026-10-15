@@ -34,6 +34,16 @@ export function NexusBack() {
       </PageHero>
 
       <Section id="steps" surface="navy" tone="back" glow="back" labelledBy="steps-title">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden transform-gpu">
+          <img
+            src="/img/b2c.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-navy/60" />
+        </div>
         <SectionHeading id="steps-title" eyebrow={t.steps.eyebrow} title={t.steps.title} />
         <Showcase label={t.steps.label} caption={t.steps.caption} steps={t.steps.items} stage="back" />
         <div className="mt-24 grid grid-cols-2 gap-6 max-lg:grid-cols-1 max-sm:mt-16">
@@ -43,6 +53,7 @@ export function NexusBack() {
       </Section>
 
       <Section surface="alt" tone="back" labelledBy="audiences-title">
+
         <SectionHeading id="audiences-title" eyebrow={t.audiences.eyebrow} title={t.audiences.title} />
         <AudienceGrid only="back" />
       </Section>

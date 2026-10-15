@@ -22,7 +22,17 @@ export function Faq() {
         lead={t.hero.lead}
         actions={<Button href={href('contact', lang)} variant="ghost" arrow>{c.nav.contact}</Button>}
       />
-      <Section>
+      <Section surface="dark">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden transform-gpu">
+          <img
+            src="/img/faq.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-deep/55" />
+        </div>
         <Reveal className="mx-auto max-w-[860px]">
           <FaqList items={t.items} />
         </Reveal>

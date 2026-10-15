@@ -20,7 +20,7 @@ export function AudienceGrid({ only }: { only?: 'b2b' | 'back' }) {
     <div className={cn('grid gap-4', COLUMNS[items.length] ?? COLUMNS[6])}>
       {items.map((a, i) => (
         <Reveal key={a.title} delay={i}>
-          <Card className="flex h-full flex-col px-6 py-7">
+          <Card className="flex h-full flex-col px-6 py-7 backdrop-blur-md">
             <IconBadge icon={a.icon} />
             <h3 className="mt-5 text-[19px] leading-tight font-bold tracking-[-.025em]"><Rich text={a.title} /></h3>
             <p className="mt-2.5 text-[15px] text-sub"><Rich text={a.text} /></p>

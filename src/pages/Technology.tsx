@@ -18,7 +18,18 @@ export function Technology() {
         <Stats items={stats} />
       </PageHero>
 
-      <Section>
+      <Section surface="dark">
+        {/* Background image covering the entire section */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden transform-gpu">
+          <img
+            src="/img/techBackground.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-deep/55" />
+        </div>
         <EngineCards items={t.engine} />
         <Coverage coverage={t.coverage} rules={t.rules} />
       </Section>

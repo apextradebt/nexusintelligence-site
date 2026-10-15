@@ -19,7 +19,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 /** Questions and answers. */
 export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="border-t border-line">
+    <div className="px-6 py-2 rounded-2xl border border-card-line bg-card/60 backdrop-blur-md">
       {items.map((item) => <FaqItem key={item.q} {...item} />)}
     </div>
   );

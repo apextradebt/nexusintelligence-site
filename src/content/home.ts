@@ -17,9 +17,9 @@ const fr = {
     title: 'Un fichier client, une dizaine d’onglets, *des jours de copier-coller.*',
     lead: 'Abréviations, specs manquantes, numéros de série seuls : avant de chiffrer un lot, il faut le déchiffrer. Puis chercher chaque prix, site par site. Au comptoir, c’est la même histoire : le client attend pendant que vous comparez.',
     outcomes: [
-      { question: 'Trop lent ?', answer: 'Le deal est perdu.', text: 'Pendant que vous chiffrez, un concurrent a déjà répondu.' },
-      { question: 'Trop cher ?', answer: 'La marge est perdue.', text: 'Une offre au-dessus du marché, et la revente ne couvre plus vos coûts.' },
-      { question: 'Pas assez ?', answer: 'Le client est perdu.', text: 'Une offre trop basse, et il vend ailleurs : en ligne, ou chez le voisin.' },
+      { question: 'Performance', answer: 'Gagnez du temps', text: 'Chiffrez rapidement une offre en important vos données et en consultant les prix récupérés.' },
+      { question: 'Adaptatif', answer: 'Une utilisation qui évolue', text: 'Adaptez et changez vos stratégies de prix en modifiant vos marges et autres réglages' },
+      { question: 'Organisation', answer: 'Organisez vos processus et devis', text: 'Gérez et suivez vos rachats de A à Z, du devis à l’expédition' },
     ],
     beforeLabel: 'Avant',
     afterLabel: 'Avec Nexus',

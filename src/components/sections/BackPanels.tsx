@@ -7,7 +7,7 @@ import { cn } from '@/lib/cn';
 function Panel({ context, title, text, delay, children }: { context: string; title: string; text: string; delay?: number; children: ReactNode }) {
   return (
     <Reveal delay={delay}>
-      <div className="h-full rounded-3xl bg-card p-8 ring-1 ring-card-line max-sm:px-5 max-sm:py-6">
+      <div className="h-full backdrop-blur-md rounded-3xl bg-card p-8 ring-1 ring-card-line max-sm:px-5 max-sm:py-6">
         <div className="font-mono text-xs tracking-[.14em] text-hl uppercase">{context}</div>
         <h3 className="mt-3 text-[26px]"><Rich text={title} /></h3>
         <p className="mt-2.5 text-[15.5px] text-sub"><Rich text={text} /></p>
