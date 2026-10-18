@@ -3,7 +3,6 @@ export const LANGS: Lang[] = ['fr', 'en'];
 
 export type PageId = 'home' | 'b2b' | 'back' | 'technology' | 'faq' | 'contact' | 'legal';
 
-// Revert these back to relative paths without the repository name
 export const PATHS: Record<PageId, Record<Lang, string>> = {
   home: { fr: '/', en: '/en/' },
   b2b: { fr: '/nexus-b2b/', en: '/en/nexus-b2b/' },
@@ -17,7 +16,7 @@ export const PATHS: Record<PageId, Record<Lang, string>> = {
 export type Route = { page: PageId | 'notFound'; lang: Lang };
 
 export function resolvePath(pathname: string): Route {
-  // Strip the exact GitHub Pages base URL completely
+  // Links from when the site lived under /nexusintelligence/ (github.io) still resolve
   let p = pathname.replace(/^\/nexusintelligence/, '');
 
   if (p === '') p = '/';
@@ -30,7 +29,6 @@ export function resolvePath(pathname: string): Route {
   return { page: 'notFound', lang: p.startsWith('/en/') ? 'en' : 'fr' };
 }
 
-// Ensure links generated in your app correctly append the base path 
-// if your custom router doesn't automatically handle it via <a href>
+/** Address of a page, optionally of an anchor in it. The site is served from the domain root. */
 export const href = (page: PageId, lang: Lang, hash?: string) =>
-  '/nexusintelligence' + PATHS[page][lang] + (hash ? `#${hash}` : '');
+  PATHS[page][lang] + (hash ? `#${hash}` : '');
