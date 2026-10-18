@@ -44,16 +44,20 @@ function Choices({ legend, name, options, value, onChange }: {
   );
 }
 
-type Status = { kind: 'idle' | 'sent' | 'error'; text: string };
+/** `mailto` is set when sending failed: the status then offers to send the message from the visitor's mail app. */
+type Status = { kind: 'idle' | 'sending' | 'sent' | 'error'; text: string; mailto?: string };
+
+const EMPTY = { name: '', company: '', email: '', phone: '', message: '', solution: 'Nexus B2B' };
 
 /**
- * Demo request. Submitting opens the visitor's mail app with the message written, so the site needs no server
- * and stores nothing. `?solution=back` in the address preselects Nexus Back.
+ * Demo request. The message goes to Web3Forms, which emails it to SITE.email, so the site needs no server and stores
+ * nothing. Without SITE.formKey, or if sending fails, the visitor's mail app opens with the message written instead.
+ * `?solution=back` in the address preselects Nexus Back.
  */
 export function ContactForm() {
   const t = useContent(contact).form;
   const lang = useLang();
-  const [values, setValues] = useState({ name: '', company: '', email: '', phone: '', message: '', solution: 'Nexus B2B' });
+  const [values, setValues] = useState(EMPTY);
   const [invalid, setInvalid] = useState({ name: false, email: false });
   const [status, setStatus] = useState<Status>({ kind: 'idle', text: '' });
 
@@ -67,8 +71,9 @@ export function ContactForm() {
     if (key === 'name' || key === 'email') setInvalid((i) => ({ ...i, [key]: false }));
   };
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status.kind === 'sending') return;
     const bad = { name: values.name.trim().length < 2, email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()) };
     setInvalid(bad);
     if (bad.name || bad.email) {
@@ -77,13 +82,45 @@ export function ContactForm() {
       return;
     }
     const f = t.fields;
-    const lines = ([
+    const fields = ([
       [f.name, values.name], [f.company, values.company], [f.email, values.email], [f.phone, values.phone], [f.solution, values.solution],
-    ] as const).filter(([, v]) => v.trim()).map(([k, v]) => `${k}${t.separator}${v.trim()}`);
-    const body = [...lines, '', values.message.trim()].join('\n');
+    ] as const).map(([k, v]) => [k, v.trim()] as const).filter(([, v]) => v);
+    const message = values.message.trim();
     const subject = [t.subject, values.solution, values.company.trim()].filter(Boolean).join(' · ');
-    setStatus({ kind: 'sent', text: t.sending + SITE.email + '.' });
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const body = [...fields.map(([k, v]) => `${k}${t.separator}${v}`), '', message].join('\n');
+    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    if (!SITE.formKey) {
+      setStatus({ kind: 'sent', text: t.mailApp + SITE.email + '.' });
+      window.location.href = mailto;
+      return;
+    }
+    // Honeypot: a person never sees this box, so whoever ticks it gets a thank-you and nothing is sent.
+    if (new FormData(e.currentTarget).get('botcheck')) {
+      setStatus({ kind: 'sent', text: t.sent });
+      return;
+    }
+    setStatus({ kind: 'sending', text: t.sending });
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: SITE.formKey,
+          subject,
+          from_name: `${values.name.trim()} · ${SITE.name}`,
+          replyto: values.email.trim(),
+          ...Object.fromEntries(fields),
+          ...(message && { [t.message]: message }),
+        }),
+      });
+      const result = await res.json().catch(() => null);
+      if (!res.ok || !result?.success) throw new Error(result?.message ?? `HTTP ${res.status}`);
+      setValues((v) => ({ ...EMPTY, solution: v.solution }));
+      setStatus({ kind: 'sent', text: t.sent });
+    } catch {
+      setStatus({ kind: 'error', text: t.failed, mailto });
+    }
   };
 
   return (
@@ -122,15 +159,17 @@ export function ContactForm() {
         <Field label={t.message} htmlFor="f-msg" full>
           <textarea id="f-msg" name="message" rows={5} placeholder={t.placeholder} value={values.message} onChange={set('message')} className={cn(INPUT, 'min-h-[130px] resize-y leading-normal')} />
         </Field>
+        <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
       </div>
       <div className="mt-[22px] flex flex-wrap items-center gap-4">
-        <Button type="submit" arrow>{t.submit}</Button>
+        <Button type="submit" arrow disabled={status.kind === 'sending'}>{t.submit}</Button>
         <p className="flex-[1_1_220px] text-[13px] leading-normal text-stone">
           <Rich text={t.note} /> (<a href={href('legal', lang, 'donnees')} className="text-whisper underline">{t.noteLink}</a>).
         </p>
       </div>
-      <p role="status" aria-live="polite" className={cn('mt-3.5 min-h-[1.5em] text-[14.5px]', status.kind === 'error' ? 'text-[#F0A283]' : 'text-lime-2')}>
+      <p role="status" aria-live="polite" className={cn('mt-3.5 min-h-[1.5em] text-[14.5px]', status.kind === 'error' ? 'text-[#F0A283]' : status.kind === 'sending' ? 'text-stone' : 'text-lime-2')}>
         {status.text && <Rich text={status.text} />}
+        {status.mailto && <><a href={status.mailto} className="underline">{t.failedLink}</a>.</>}
       </p>
     </form>
   );

@@ -1,6 +1,6 @@
 import { Languages, Layers, Video } from 'lucide-react';
 
-/** Contact page and form. The form opens the visitor's mail app: nothing is sent to a server. */
+/** Contact page and form. The form emails the message through Web3Forms; the site itself stores nothing. */
 const fr = {
   eyebrow: 'Contact',
   title: 'Chiffrons ensemble *votre prochain lot.*',
@@ -21,9 +21,13 @@ const fr = {
     message: 'Message',
     placeholder: 'Votre activité, vos volumes, vos questions…',
     submit: 'Envoyer',
-    note: 'Le bouton ouvre votre messagerie avec le message prêt à partir. Ce site n’enregistre aucune donnée',
+    note: 'Vos coordonnées servent uniquement à vous répondre. Ce site n’enregistre aucune donnée',
     noteLink: 'en savoir plus',
-    sending: 'Votre messagerie s’ouvre avec le message prêt à partir. Rien ne s’ouvre ? Écrivez-nous à ',
+    sending: 'Envoi en cours…',
+    sent: 'Merci, votre message nous est bien parvenu. Nous vous répondons à l’adresse indiquée.',
+    failed: 'L’envoi n’a pas abouti. Réessayez dans un instant, ou ',
+    failedLink: 'envoyez-le depuis votre messagerie',
+    mailApp: 'Votre messagerie s’ouvre avec le message prêt à partir. Rien ne s’ouvre ? Écrivez-nous à ',
     invalid: 'Indiquez votre nom et une adresse e-mail valide.',
     subject: 'Demande de démo',
     fields: { name: 'Nom', company: 'Société', email: 'E-mail', phone: 'Téléphone', solution: 'Solution' },
@@ -51,9 +55,13 @@ const en: typeof fr = {
     message: 'Message',
     placeholder: 'Your business, your volumes, your questions…',
     submit: 'Send',
-    note: 'The button opens your email app with the message ready to send. This site stores no data',
+    note: 'Your details are used only to reply to you. This site stores no data',
     noteLink: 'details',
-    sending: 'Your email app is opening with the message ready to send. Nothing happened? Write to us at ',
+    sending: 'Sending…',
+    sent: 'Thank you, your message has reached us. We’ll reply to the address you gave.',
+    failed: 'Your message couldn’t be sent. Try again in a moment, or ',
+    failedLink: 'send it from your email app',
+    mailApp: 'Your email app is opening with the message ready to send. Nothing happened? Write to us at ',
     invalid: 'Please enter your name and a valid email address.',
     subject: 'Demo request',
     fields: { name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', solution: 'Solution' },

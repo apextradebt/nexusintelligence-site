@@ -24,15 +24,16 @@ type Props = {
   /** Adds an arrow that slides on hover. */
   arrow?: boolean;
   type?: 'button' | 'submit';
+  disabled?: boolean;
   onClick?: () => void;
   className?: string;
   children: ReactNode;
 };
 
 /** Pill-shaped call-to-action button or link. */
-export function Button({ href, variant = 'lime', size = 'md', arrow, type = 'button', onClick, className, children }: Props) {
+export function Button({ href, variant = 'lime', size = 'md', arrow, type = 'button', disabled, onClick, className, children }: Props) {
   const classes = cn(
-    'group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full border font-semibold transition duration-200 ease-soft active:translate-y-px',
+    'group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full border font-semibold transition duration-200 ease-soft active:translate-y-px disabled:pointer-events-none disabled:opacity-60',
     VARIANTS[variant],
     SIZES[size],
     className,
@@ -46,6 +47,6 @@ export function Button({ href, variant = 'lime', size = 'md', arrow, type = 'but
   return href ? (
     <a href={href} className={classes}>{content}</a>
   ) : (
-    <button type={type} onClick={onClick} className={classes}>{content}</button>
+    <button type={type} disabled={disabled} onClick={onClick} className={classes}>{content}</button>
   );
 }

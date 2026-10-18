@@ -23,13 +23,13 @@ export function LegalNotice() {
   return (
     <div className="mx-auto max-w-[860px]">
       <h1 id="page-title" className="text-[clamp(36px,5vw,54px)] text-ink">{lang === 'fr' ? 'Mentions légales' : 'Legal notice'}</h1>
-      <p className="mt-3.5 text-[14.5px] text-muted">{lang === 'fr' ? 'Dernière mise à jour : 12 octobre 2026' : 'Last updated: 12 October 2026'}</p>
+      <p className="mt-3.5 text-[14.5px] text-muted">{lang === 'fr' ? 'Dernière mise à jour : 18 octobre 2026' : 'Last updated: 18 October 2026'}</p>
 
       {lang === 'en' && (
         <p className="mt-6 rounded-2xl bg-page-alt p-5 leading-[1.75] text-muted">
           <strong className="text-ink">This legal notice is written in French, as French law requires.</strong> In short: this site is
           published by Nexus Intelligence, sets no cookies, runs no analytics, loads nothing from third parties and stores none of your
-          data. The contact form only opens your own email app. Write to <Mail /> for any question about your data.
+          data. Messages sent with the contact form reach our inbox by email through the Web3Forms service. Write to <Mail /> for any question about your data.
         </p>
       )}
 
@@ -59,7 +59,7 @@ export function LegalNotice() {
 
         <H2 id="donnees">Données personnelles</H2>
         <P><strong className="text-ink">Ce site ne dépose aucun cookie</strong> et n’utilise aucun outil de mesure d’audience, de publicité ou de suivi. Les polices de caractères et les vidéos sont servies depuis ce site&nbsp;: aucune ressource n’est chargée depuis un service tiers.</P>
-        <P><strong className="text-ink">Formulaire de contact.</strong> Le formulaire n’envoie rien à nos serveurs&nbsp;: il ouvre votre propre messagerie avec un message prérempli, que vous êtes libre d’envoyer ou non. Si vous nous écrivez, les informations de votre e-mail (nom, société, coordonnées, message) sont utilisées uniquement pour vous répondre et assurer le suivi de votre demande. Elles ne sont ni vendues ni cédées, et sont conservées au plus <Todo>3 ans</Todo> après notre dernier échange.</P>
+        <P><strong className="text-ink">Formulaire de contact.</strong> Le message que vous envoyez avec le formulaire nous est transmis par e-mail par l’intermédiaire du service Web3Forms&nbsp;; ce site ne le conserve pas. Les informations qu’il contient (nom, société, coordonnées, message) sont utilisées uniquement pour vous répondre et assurer le suivi de votre demande. Elles ne sont ni vendues ni cédées, et sont conservées au plus <Todo>3 ans</Todo> après notre dernier échange.</P>
         <P><strong className="text-ink">Journaux techniques.</strong> Comme tout site web, l’hébergeur peut enregistrer des journaux techniques (adresse IP, date, page demandée) pour assurer la sécurité et le bon fonctionnement du service.</P>
         <P><strong className="text-ink">Vos droits.</strong> Conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés, vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition sur vos données. Pour l’exercer, écrivez à <Mail />. Vous pouvez aussi adresser une réclamation à la CNIL (<a href="https://www.cnil.fr" rel="noopener" className="underline">www.cnil.fr</a>).</P>
 
