@@ -8,7 +8,7 @@ import { contact } from '@/content/contact';
 import { useContent } from '@/i18n';
 import { SITE } from '@/site';
 
-/** Contact: what the demo is, the email address and the form. */
+/** Contact: what the demo is, the email address (a link to the form) and the form. */
 export function Contact() {
   const t = useContent(contact);
   return (
@@ -26,7 +26,7 @@ export function Contact() {
               </li>
             ))}
           </ul>
-          <a href={`mailto:${SITE.email}`} className="mt-9 inline-flex items-center gap-3 border-b-2 border-lime/50 pb-1 text-[clamp(19px,2vw,23px)] font-bold tracking-[-.02em] transition-colors hover:border-lime">
+          <a href="#contact-form" className="mt-9 inline-flex items-center gap-3 border-b-2 border-lime/50 pb-1 text-[clamp(19px,2vw,23px)] font-bold tracking-[-.02em] transition-colors hover:border-lime">
             <Mail aria-hidden className="size-[22px] text-hl" strokeWidth={1.9} />
             {SITE.email}
           </a>

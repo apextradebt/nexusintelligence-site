@@ -64,6 +64,13 @@ export function ContactForm() {
   useEffect(() => {
     const wanted = new URLSearchParams(window.location.search).get('solution');
     if (wanted === 'back') setValues((v) => ({ ...v, solution: 'Nexus Back' }));
+    // The email address links lead to #contact-form: put the cursor in the first field (the browser does the scrolling).
+    const focusIfTargeted = () => {
+      if (window.location.hash === '#contact-form') document.getElementById('f-name')?.focus({ preventScroll: true });
+    };
+    focusIfTargeted();
+    window.addEventListener('hashchange', focusIfTargeted);
+    return () => window.removeEventListener('hashchange', focusIfTargeted);
   }, []);
 
   const set = (key: keyof typeof values) => (e: { target: { value: string } }) => {
@@ -125,6 +132,7 @@ export function ContactForm() {
 
   return (
     <form
+      id="contact-form"
       onSubmit={submit}
       noValidate
       action={`mailto:${SITE.email}`}
