@@ -49,6 +49,11 @@ type Status = { kind: 'idle' | 'sending' | 'sent' | 'error'; text: string; mailt
 
 const EMPTY = { name: '', company: '', email: '', phone: '', message: '', solution: 'Nexus B2B' };
 
+/** Set by the Umami script (head.ts) when it has loaded; absent when blocked, not configured, or Do Not Track is on. */
+declare global {
+  interface Window { umami?: { track: (event: string, data?: Record<string, string>) => void } }
+}
+
 /**
  * Demo request. The message goes to Web3Forms, which emails it to SITE.email, so the site needs no server and stores
  * nothing. Without SITE.formKey, or if sending fails, the visitor's mail app opens with the message written instead.
@@ -123,9 +128,12 @@ export function ContactForm() {
       });
       const result = await res.json().catch(() => null);
       if (!res.ok || !result?.success) throw new Error(result?.message ?? `HTTP ${res.status}`);
+      // Counts the request and the product asked about, never what the visitor typed.
+      window.umami?.track('Contact form sent', { solution: values.solution, lang });
       setValues((v) => ({ ...EMPTY, solution: v.solution }));
       setStatus({ kind: 'sent', text: t.sent });
     } catch {
+      window.umami?.track('Contact form failed', { lang });
       setStatus({ kind: 'error', text: t.failed, mailto });
     }
   };

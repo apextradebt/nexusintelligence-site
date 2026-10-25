@@ -14,12 +14,18 @@ const STRUCTURED_DATA = {
   ],
 };
 
-/** The <head> tags of a page: title, description, canonical and language alternates, link preview. */
+// Umami visit statistics: no cookies, nothing counted off the live domain (local previews) or when the browser sends Do Not Track.
+const ANALYTICS = SITE.umamiId
+  ? `<script defer src="https://cloud.umami.is/script.js" data-website-id="${escape(SITE.umamiId)}" data-domains="${new URL(SITE.url).hostname}" data-do-not-track="true"></script>`
+  : '';
+
+/** The <head> tags of a page: title, description, canonical and language alternates, link preview, analytics. */
 export function headTags({ page, lang }: Route): string {
   const m = meta[lang][page];
   const tags = [
     `<title>${escape(m.title)}</title>`,
     `<meta name="description" content="${escape(m.description)}" />`,
+    ...(ANALYTICS ? [ANALYTICS] : []),
   ];
   if (page === 'notFound') return [...tags, '<meta name="robots" content="noindex" />'].join('\n    ');
 

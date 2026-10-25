@@ -16,7 +16,7 @@ const fr = {
     legalNotice: 'Mentions légales',
     privacy: 'Données personnelles',
     credits: 'Crédits',
-    noCookies: 'Ce site n’utilise aucun cookie ni outil de suivi.',
+    noCookies: 'Ce site n’utilise aucun cookie. La mesure d’audience est anonyme.',
   },
 };
 
@@ -37,7 +37,7 @@ const en: typeof fr = {
     legalNotice: 'Legal notice',
     privacy: 'Privacy',
     credits: 'Credits',
-    noCookies: 'This site uses no cookies or trackers.',
+    noCookies: 'This site uses no cookies. Visit statistics are anonymous.',
   },
 };
 
